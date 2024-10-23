@@ -2,7 +2,7 @@ __pycache__/
 .pytest_cache/
 .venv/
 .env.prod
-e2e/reports/
+reports/
 *.png
 e2e/config/config.json
 e2e/config/login_data.json
