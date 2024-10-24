@@ -29,6 +29,14 @@ def test_chatbox(browser_context):
         chatbox_page.text_send_confirm("Good day")
         page.evaluate("window.scrollTo(0, document.body.scrollHeight);")
 
+    with allure.step("Send attachments and verify delivery"):
+        # chatbox_page.attachment_send_confirm("image", "../data/1.8mb.jpg")
+        # chatbox_page.attachment_send_confirm("video", "path/to/video.mp4")
+        # chatbox_page.attachment_send_confirm("audio", "path/to/audio.mp3")
+        # chatbox_page.attachment_send_confirm("document", "path/to/document.pdf")
+        chatbox_page.attachment_send_confirm("image", "../data/1.8mb.jpg")
+        page.wait_for_timeout(5000)
+
     allure.attach(
         page.screenshot(),
         name="Chatbox Screenshot",
