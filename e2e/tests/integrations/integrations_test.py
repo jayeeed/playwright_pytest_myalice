@@ -18,13 +18,22 @@ def test_integrations(browser_context):
         integrations_page = IntegrationsPage(page)
         integrations_page.goto_integrations()
 
-    with allure.step("Verify store integrations"):
-        integrations_page.goto_woocommerce()
-        integrations_page.goto_salla()
+    with allure.step("Verify E-COMMERCE integrations"):
+        with allure.step("Verify WooCommerce integrations"):
+            integrations_page.goto_woocommerce()
+        with allure.step("Verify Salla integrations"):
+            integrations_page.goto_salla()
 
-    with allure.step("Verify channel integrations"):
-        integrations_page.goto_messenger()
-        integrations_page.goto_ig_feed()
+    with allure.step("Verify CHANNEL integrations"):
+        integrations = {
+            "fb_feed": "https://www.facebook.com",
+            "fb_chat": "https://www.facebook.com",
+            "ig_feed": "https://www.facebook.com",
+            "ig_chat": "https://www.facebook.com",
+        }
+        for integration, url in integrations.items():
+            with allure.step(f"Verify {integration} integration"):
+                integrations_page.goto_fb_ig_feed_chat(integration, url)
 
     allure.attach(
         page.screenshot(),

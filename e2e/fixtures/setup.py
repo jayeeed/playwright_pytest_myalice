@@ -7,7 +7,7 @@ from playwright.sync_api import sync_playwright
 def browser_context():
     with sync_playwright() as playwright:
         browser: Browser = playwright.chromium.launch(
-            headless=False, slow_mo=1000, args=["--start-maximized"]
+            headless=False, slow_mo=500, args=["--start-maximized"]
         )
         context: BrowserContext = browser.new_context(no_viewport=True)
 

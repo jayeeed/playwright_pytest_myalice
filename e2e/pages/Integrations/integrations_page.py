@@ -10,8 +10,10 @@ class IntegrationsPage:
             "integrations_div": '//span[contains(text(), "Available Integrations")]',
             "woocommerce": '//h3[contains(text(), "WooCommerce")]',
             "salla": '//h3[contains(text(), "Salla")]',
-            "messenger": '//h3[contains(text(), "Messenger")]',
+            "fb_feed": '//h3[contains(text(), "Facebook Feed")]',
+            "fb_chat": '//h3[contains(text(), "Messenger")]',
             "ig_feed": '//h3[contains(text(), "Instagram Feed")]',
+            "ig_chat": '//h3[contains(text(), "Instagram Chat")]',
             "store_continue": '[data-testid="button-element"]',
             "channel_next": '[data-testid="button-element"]:text("Next")',
             "channel_continue": '//button[contains(text(), "Connect With")]',
@@ -47,16 +49,16 @@ class IntegrationsPage:
         self.page.locator(self.selectors["close_icon"]).click()
         self.page.wait_for_selector(self.selectors["close_toast"]).click()
 
-    def goto_messenger(self):
-        self.page.click(self.selectors["messenger"])
-        self.page.wait_for_selector(
+    def goto_fb_ig_feed_chat(self, integration, url):
+        parent_page = self.page
+        parent_page.click(self.selectors[integration])
+        parent_page.wait_for_selector(
             self.selectors["channel_next"], state="visible"
         ).click()
-        self.page.click(self.selectors["channel_continue"])
+        parent_page.click(self.selectors["channel_continue"])
 
-    def goto_ig_feed(self):
-        self.page.click(self.selectors["ig_feed"])
-        self.page.wait_for_selector(
-            self.selectors["channel_next"], state="visible"
-        ).click()
-        # self.page.locator(self.selectors["close_icon"]).click()
+        child_page = self.page.context.wait_for_event("page")
+        child_page.wait_for_load_state("domcontentloaded")
+        assert url in child_page.url
+        child_page.close()
+        self.page.locator(self.selectors["close_icon"]).click()
