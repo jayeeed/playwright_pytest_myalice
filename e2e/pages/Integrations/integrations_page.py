@@ -29,7 +29,7 @@ class IntegrationsPage:
             self.selectors["integrations_div"], state="visible"
         ).click()
 
-    def goto_woocommerce(self):
+    def goto_woocommerce(self, url):
         self.page.click(self.selectors["woocommerce"])
         self.page.wait_for_selector(
             self.selectors["store_continue"], state="visible"
@@ -37,7 +37,7 @@ class IntegrationsPage:
 
         new_tab = self.page.context.wait_for_event("page")
         new_tab.wait_for_load_state("domcontentloaded")
-        assert "https://wordpress.org/plugins/myaliceai/" in new_tab.url
+        assert url in new_tab.url
         new_tab.close()
         self.page.locator(self.selectors["close_icon"]).click()
 

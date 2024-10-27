@@ -20,7 +20,9 @@ def test_integrations(browser_context):
 
     with allure.step("Verify E-COMMERCE integrations"):
         with allure.step("Verify WooCommerce integrations"):
-            integrations_page.goto_woocommerce()
+            integrations_page.goto_woocommerce(
+                "https://wordpress.org/plugins/myaliceai/"
+            )
         with allure.step("Verify Salla integrations"):
             integrations_page.goto_salla()
 
