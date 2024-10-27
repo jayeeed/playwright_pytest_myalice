@@ -40,6 +40,6 @@ def test_chatbox(browser_context):
 
     allure.attach(
         page.screenshot(),
-        name="Chatbox Screenshot",
+        name="Screenshot",
         attachment_type=allure.attachment_type.PNG,
     )
