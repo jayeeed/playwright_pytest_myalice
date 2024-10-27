@@ -10,6 +10,7 @@ def browser_context():
         context: BrowserContext = browser.new_context(no_viewport=True)
 
         page: Page = context.new_page()
+        page.set_default_timeout(60000)
         yield page
 
         context.close()
