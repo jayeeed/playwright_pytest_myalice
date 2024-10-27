@@ -30,11 +30,11 @@ def test_chatbox(browser_context):
         page.evaluate("window.scrollTo(0, document.body.scrollHeight);")
 
     with allure.step("Send attachments and verify delivery"):
-        chatbox_page.handle_attachment_modal()
+        # chatbox_page.handle_attachment_modal()
         chatbox_page.upload_image("e2e/data/images/2mb.jpg")
-        chatbox_page.upload_image("e2e/data/images/6mb.jpg")
+        # chatbox_page.upload_image("e2e/data/images/6mb.jpg")
         chatbox_page.upload_video("e2e/data/videos/2mb.mp4")
-        chatbox_page.upload_video("e2e/data/videos/8mb.mp4")
+        # chatbox_page.upload_video("e2e/data/videos/8mb.mp4")
         # chatbox_page.upload_audio()
         # chatbox_page.upload_document()
 

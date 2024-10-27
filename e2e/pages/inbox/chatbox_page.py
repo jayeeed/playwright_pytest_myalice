@@ -63,9 +63,3 @@ class ChatboxPage:
         except TimeoutError:
             # If it is not visible, click the close modal button
             self.page.click(self.selectors["close_modal"])
-
-
-# Usage example
-# chatbox = ChatboxPage(page)
-# chatbox.goto_chatbox()
-# chatbox.handle_attachment_modal()  # This checks the attachment list and handles the modal
