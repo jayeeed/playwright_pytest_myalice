@@ -30,6 +30,7 @@ class IntegrationsPage:
             ######### Integrations #########
             "store_continue": '[data-testid="button-element"]',
             "channel_next": '[data-testid="button-element"]:text("Next")',
+            "wa_next": '[data-testid="button-element"]:text("Connect Whatsapp")',
             "channel_continue": '//button[contains(text(), "Connect With")]',
             "close_icon": "path[d='M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z']",
             "close_toast": "path[d='M18 6 6 18']",
@@ -43,8 +44,8 @@ class IntegrationsPage:
             self.selectors["integrations_div"], state="visible"
         ).click()
 
-    def goto_woocommerce(self, url):
-        self.page.click(self.selectors["woocommerce"])
+    def goto_woocommerce_shopify_zid(self, integration, url):
+        self.page.click(self.selectors[integration])
         self.page.wait_for_selector(
             self.selectors["store_continue"], state="visible"
         ).click()
@@ -63,13 +64,19 @@ class IntegrationsPage:
         self.page.locator(self.selectors["close_icon"]).click()
         self.page.wait_for_selector(self.selectors["close_toast"]).click()
 
-    def goto_fb_ig_feed_chat(self, integration, url):
+    def goto_meta(self, integration, url):
         parent_page = self.page
         parent_page.click(self.selectors[integration])
-        parent_page.wait_for_selector(
-            self.selectors["channel_next"], state="visible"
-        ).click()
-        parent_page.click(self.selectors["channel_continue"])
+
+        if integration == "whatsapp":
+            parent_page.wait_for_selector(
+                self.selectors["wa_next"], state="visible"
+            ).click()
+        else:
+            parent_page.wait_for_selector(
+                self.selectors["channel_next"], state="visible"
+            ).click()
+            parent_page.click(self.selectors["channel_continue"])
 
         child_page = self.page.context.wait_for_event("page")
         child_page.wait_for_load_state("domcontentloaded")
