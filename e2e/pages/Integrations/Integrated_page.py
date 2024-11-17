@@ -19,17 +19,20 @@ class IntegratedPage:
         self.page.locator(self.SELECTORS["integration_nav"]).click()
 
     def delete_integrations(self):
-        self.page.wait_for_timeout(10000)
         integration_boxes = self.page.locator(self.SELECTORS["integrations_card"]).all()
 
         for box in integration_boxes:
             if "Salla Livechat" in box.inner_text():
-                box.locator(self.SELECTORS["three_dot"]).click()
-                self.page.locator(self.SELECTORS["integration_menu_delete"]).click()
-                self.page.locator(self.SELECTORS["integration_disconnect"]).click()
-                box.locator(self.SELECTORS["three_dot"]).click()
-                self.page.locator(self.SELECTORS["integration_menu_delete"]).click()
-                self.page.get_by_placeholder("Type 'DELETE' Here").fill("delete")
-                self.page.locator(self.SELECTORS["integration_delete"]).click()
+                self._delete_integration(box)
+                break
         else:
             assert False, "No Salla integration found"
+
+    def _delete_integration(self, box):
+        box.locator(self.SELECTORS["three_dot"]).click()
+        self.page.locator(self.SELECTORS["integration_menu_delete"]).click()
+        self.page.locator(self.SELECTORS["integration_disconnect"]).click()
+        box.locator(self.SELECTORS["three_dot"]).click()
+        self.page.locator(self.SELECTORS["integration_menu_delete"]).click()
+        self.page.get_by_placeholder("Type 'DELETE' Here").fill("delete")
+        self.page.locator(self.SELECTORS["integration_delete"]).click()
