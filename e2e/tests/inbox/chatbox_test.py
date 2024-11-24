@@ -1,5 +1,7 @@
 import allure
 from tests.base_test import login
+import pytest
+from playwright.sync_api import expect
 from pages.inbox.chatbox_page import ChatboxPage
 from utils.config_loader import load_config
 
@@ -25,7 +27,7 @@ def test_chatbox(browser_context):
 
     with allure.step("Verify chatbox URL and send message"):
         # Replace with your project id
-        page.wait_for_url(f"{base_url}/projects/1981/inbox")
+        expect(page).to_have_url(f"{base_url}/projects/1981/inbox")
         chatbox_page.text_send_confirm("Good day")
         page.evaluate("window.scrollTo(0, document.body.scrollHeight);")
 
