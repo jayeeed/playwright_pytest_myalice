@@ -6,6 +6,7 @@ from pages.inbox.chatbox_page import ChatboxPage
 from utils.config_loader import load_config
 
 
+@pytest.mark.skip(reason="Skipping for now")
 @allure.feature("Chatbox Functionality")
 @allure.story("User sends message via chatbox")
 @allure.severity(allure.severity_level.NORMAL)

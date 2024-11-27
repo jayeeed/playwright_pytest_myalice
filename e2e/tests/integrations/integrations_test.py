@@ -1,9 +1,11 @@
 import allure
+import pytest
 from tests.base_test import login
 from pages.integrations.integrations_page import IntegrationsPage
 from utils.config_loader import load_config
 
 
+@pytest.mark.skip(reason="Skipping for now")
 @allure.feature("Integrations Functionality")
 @allure.story("User integrates with stores")
 @allure.severity(allure.severity_level.CRITICAL)

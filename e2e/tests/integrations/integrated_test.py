@@ -8,7 +8,7 @@ from pages.integrations.integrated_page import IntegratedPage
 @allure.severity(allure.severity_level.CRITICAL)
 @allure.link("https://your_project_tracking_url", name="Project Tracking Link")
 @allure.description("This test verifies that the user can integrate with stores.")
-def test_integrations(browser_context):
+def test_integrated(browser_context):
     page = browser_context
 
     with allure.step("Log in to the application"):
