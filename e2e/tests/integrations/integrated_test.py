@@ -1,7 +1,6 @@
 import allure
 from tests.base_test import login
 from pages.integrations.integrated_page import IntegratedPage
-from utils.config_loader import load_config
 
 
 @allure.feature("Integrations Functionality")
@@ -16,7 +15,6 @@ def test_integrations(browser_context):
         login(page)
 
     with allure.step("Load configuration and navigate to integrations"):
-        config = load_config()
         integrated_page = IntegratedPage(page)
         integrated_page.goto_integrations()
 
